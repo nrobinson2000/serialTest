@@ -7,7 +7,7 @@ import time
 
 try:
     ser = serial.Serial(sys.argv[1])
-    
+
 except IndexError:
     print()
     print("Please provide a serial port!")
@@ -21,6 +21,7 @@ except serial.serialutil.SerialException:
 else:
     filename = "readings-" + str(time.time()) +".csv"
     f = open(filename, "w")
+    f.write("Counter, Milliseconds\n")
     for i in range(0, 10):
         line = ser.readline()
         f.write(line)
