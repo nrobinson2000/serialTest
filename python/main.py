@@ -5,6 +5,8 @@ import serial
 import sys
 import time
 
+header = "waterRemaining, rawData, correctedData, creepData, lbs, voltage, stateOfCharge, timeStamp, temp, bottleCount, uptime, resetReason, disconnects, rssi, signalQuality, rippleVersion, particleVersion\n"
+
 try:
     ser = serial.Serial(sys.argv[1])
 
@@ -21,7 +23,7 @@ except serial.serialutil.SerialException:
 else:
     filename = "readings-" + str(time.time()) +".csv"
     f = open(filename, "w")
-    f.write("Counter, Milliseconds\n")
+    f.write(header)
     for i in range(0, 10):
         line = ser.readline()
         f.write(line)
